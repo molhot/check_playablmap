@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 21:23:41 by user              #+#    #+#             */
-/*   Updated: 2023/01/02 10:56:55 by user             ###   ########.fr       */
+/*   Updated: 2023/01/02 16:59:57 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ int main()
     }
     mapinfo[position] = NULL;
     printf("map is %d\n", map_basiccheck(mapinfo));
+    printf("map is not playable or not : %d\n", fill_check(mapinfo, position));
 }

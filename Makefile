@@ -1,6 +1,6 @@
 NAME = gnl
 
-SRCS = basic_check.c fill_color_check.c get_next_line.c main.c\
+SRCS = basic_check.c get_next_line.c main.c check_fill.c\
 		libft/ft_strchr.c libft/ft_strjoin.c libft/ft_strlen.c
 
 OBJS = $(SRCS:.c=.o)
