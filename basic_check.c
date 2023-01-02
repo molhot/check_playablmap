@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 21:23:31 by user              #+#    #+#             */
-/*   Updated: 2023/01/02 00:39:26 by user             ###   ########.fr       */
+/*   Updated: 2023/01/02 10:56:38 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,51 @@
 
 #include "checker.h"
 
+bool mandatory_mapcheck(char **map)
+{
+    size_t  p;
+    size_t  e;
+    size_t  c;
+    size_t  map_highposition;
+    size_t  rowposition;
+
+    p = 0;
+    e = 0;
+    c = 0;
+    map_highposition = 0;
+    rowposition = 0; 
+    while (map[map_highposition] != NULL)
+    {
+        while (map[map_highposition][rowposition] != '\0')
+        {
+            if (map[map_highposition][rowposition] == 'P')
+                p++;
+            else if (map[map_highposition][rowposition] == 'E')
+                e++;
+            else if (map[map_highposition][rowposition] == 'C')
+                c++;
+            rowposition++;
+        }
+        rowposition = 0;
+        map_highposition++;
+    }
+    printf("p is %ld & e is %ld & c is %ld\n", p, e, c);
+    if (p == 1 && e > 0 && c > 0)
+        return (true);
+    else
+        return (false);
+}
+
+static size_t	ft_strlen_withn(const char (*string_row))
+{
+	size_t	stringlen;
+
+	stringlen = 0;
+	while (string_row[stringlen] != '\0' && string_row[stringlen] != '\n')
+		stringlen++;
+	return (stringlen);
+}
+
 bool map_rowcheck(char **mapinfo)
 {
     size_t position;
@@ -22,11 +67,12 @@ bool map_rowcheck(char **mapinfo)
     size_t row;
 
     position = 0;
-    befor_row = ft_strlen(mapinfo[position]);
-    while (mapinfo[position] != NULL)
+    befor_row = ft_strlen_withn(mapinfo[position]);
+    while (mapinfo[position + 1] != NULL)
     {
         position++;
-        row = ft_strlen(mapinfo[position]);
+        row = ft_strlen_withn(mapinfo[position]);
+        printf("before row is > %ld && after row is %ld\n", befor_row, row);
         if (row != befor_row)
             return (false);
         befor_row = row;
@@ -47,8 +93,13 @@ bool    map_basiccheck(char **mapinfo)
     while (mapinfo[map_position] != NULL)
         map_position++;
     map_high = map_position;
+    printf("test is started\n");
     if (map_rowcheck(mapinfo) != true)
         return (false);
+    printf("row missinfg is not detected\n");
+    if (mandatory_mapcheck(mapinfo) != true)
+        return (false);
+    printf("map character is satisfied mandatory\n");
     map_row = ft_strlen(mapinfo[0]);
     map_position = 0;
     while (mapinfo[map_position] != NULL)

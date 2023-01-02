@@ -18,6 +18,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME) $(BONUS_OBJS)
+	rm -rf a.out
 
 re: fclean all
 

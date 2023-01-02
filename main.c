@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 21:23:41 by user              #+#    #+#             */
-/*   Updated: 2023/01/02 00:31:24 by user             ###   ########.fr       */
+/*   Updated: 2023/01/02 10:56:55 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main()
     //map読み込み
     char *textdata;
 
-    textdata = "src/map3.ber";
+    textdata = "src/map4.ber";
     fd = open(textdata, O_RDONLY);
     line = get_next_line(fd);
     position = 1;
