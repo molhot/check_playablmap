@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:45:32 by user              #+#    #+#             */
-/*   Updated: 2023/01/01 23:11:56 by user             ###   ########.fr       */
+/*   Updated: 2023/01/03 16:10:53 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,6 @@ static	char	*input_char(const char *insert, char *inserted)
 		inserted = inserted + 1;
 	}
 	return (inserted);
-}
-
-char	*ft_strdup(const char *s)
-{
-	int		len;
-	char	*src_sub;
-
-	len = ft_strlen(s);
-	src_sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (src_sub == NULL)
-		return (NULL);
-	while ((*s) != '\0')
-	{
-		*src_sub = *s;
-		s = s + 1;
-		src_sub = src_sub + 1;
-	}
-	*src_sub = '\0';
-	src_sub = src_sub - len;
-	return (src_sub);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

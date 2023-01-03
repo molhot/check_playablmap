@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 21:23:56 by user              #+#    #+#             */
-/*   Updated: 2023/01/02 17:13:26 by user             ###   ########.fr       */
+/*   Updated: 2023/01/03 16:11:35 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ size_t	ft_strlen(const char (*string_row));
 char	*ft_strjoin(char const *s1, char const *s2);
 bool    map_basiccheck(char **mapinfo);
 bool    fill_check(char **mapinfo, int position);
+void    free_arrangement(char **map);
+char	*ft_strdup(const char *s);
 
 #endif

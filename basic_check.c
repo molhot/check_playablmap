@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 21:23:31 by user              #+#    #+#             */
-/*   Updated: 2023/01/02 10:56:38 by user             ###   ########.fr       */
+/*   Updated: 2023/01/03 14:56:18 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,31 @@
 
 #include "checker.h"
 
+static void char_increment(char **map, size_t high, size_t row, size_t *P, size_t *E, size_t *C)
+{
+    while (map[high] != NULL)
+    {
+        while (map[high][row] != '\0')
+        {
+            if (map[high][row] == 'P')
+                *P = *P + 1;
+            else if (map[high][row] == 'E')
+                *E = *E + 1;
+            else if (map[high][row] == 'C')
+                *C = *C + 1;
+            row++;
+        }
+        row = 0;
+        high++;
+    }
+}
+
 bool mandatory_mapcheck(char **map)
 {
     size_t  p;
     size_t  e;
     size_t  c;
-    size_t  map_highposition;
+    int      map_highposition;
     size_t  rowposition;
 
     p = 0;
@@ -28,26 +47,10 @@ bool mandatory_mapcheck(char **map)
     c = 0;
     map_highposition = 0;
     rowposition = 0; 
-    while (map[map_highposition] != NULL)
-    {
-        while (map[map_highposition][rowposition] != '\0')
-        {
-            if (map[map_highposition][rowposition] == 'P')
-                p++;
-            else if (map[map_highposition][rowposition] == 'E')
-                e++;
-            else if (map[map_highposition][rowposition] == 'C')
-                c++;
-            rowposition++;
-        }
-        rowposition = 0;
-        map_highposition++;
-    }
-    printf("p is %ld & e is %ld & c is %ld\n", p, e, c);
+    char_increment(map, map_highposition, rowposition, &p, &e, &c);
     if (p == 1 && e > 0 && c > 0)
         return (true);
-    else
-        return (false);
+    return (false);
 }
 
 static size_t	ft_strlen_withn(const char (*string_row))
@@ -72,7 +75,6 @@ bool map_rowcheck(char **mapinfo)
     {
         position++;
         row = ft_strlen_withn(mapinfo[position]);
-        printf("before row is > %ld && after row is %ld\n", befor_row, row);
         if (row != befor_row)
             return (false);
         befor_row = row;
@@ -93,13 +95,10 @@ bool    map_basiccheck(char **mapinfo)
     while (mapinfo[map_position] != NULL)
         map_position++;
     map_high = map_position;
-    printf("test is started\n");
     if (map_rowcheck(mapinfo) != true)
         return (false);
-    printf("row missinfg is not detected\n");
     if (mandatory_mapcheck(mapinfo) != true)
         return (false);
-    printf("map character is satisfied mandatory\n");
     map_row = ft_strlen(mapinfo[0]);
     map_position = 0;
     while (mapinfo[map_position] != NULL)
@@ -110,12 +109,7 @@ bool    map_basiccheck(char **mapinfo)
             while (mapinfo[map_position][position] != '\n')
             {
                 if (mapinfo[map_position][position] != '1')
-                {
-                    printf("this map is not playable\n");
                     return (false);
-                }
-                //mapで使われている文字を確認する
-                //ここ
                 position++;
             }
         }
@@ -125,8 +119,6 @@ bool    map_basiccheck(char **mapinfo)
             {
                 if ((position == 0 || position == map_row) && mapinfo[map_position][position] != '1')
                     return (false);
-                //mapで使われている文字を確認する
-                //ここ
                 position++;
             }
         }
